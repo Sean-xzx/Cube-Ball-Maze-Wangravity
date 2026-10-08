@@ -28,8 +28,8 @@ test('isolated development API persists best-only records and latest avatar', { 
     for (let attempt = 0; attempt < 100; attempt++) {
       if (spawnError) throw spawnError;
       if (server.exitCode !== null) throw new Error(`Fixture server exited: ${output}`);
-      if (output.includes(address)) break;
-      if (attempt === 99) throw new Error('Fixture server startup timed out');
+      if (output.replace(/\u001b\[[0-9;]*m/g, '').includes(address)) break;
+      if (attempt === 99) throw new Error(`Fixture server startup timed out: ${output}`);
       await new Promise(resolve => setTimeout(resolve, 100));
     }
     assert.equal((await request('/api/player/missing')).status, 404);

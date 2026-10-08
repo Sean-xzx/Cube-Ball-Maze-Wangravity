@@ -24,7 +24,7 @@ try {
     if (spawnError) throw spawnError;
     if (server.exitCode !== null) throw new Error(`Preview exited: ${output}`);
     // Wait for this process, not another listener on the requested port.
-    if (output.includes(address)) break;
+    if (output.replace(/\u001b\[[0-9;]*m/g, '').includes(address)) break;
     if (attempt === 99) throw new Error('Preview startup timed out. Run npm run build first.');
     await new Promise(resolve => setTimeout(resolve, 100));
   }
