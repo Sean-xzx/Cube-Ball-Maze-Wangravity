@@ -3,14 +3,14 @@
   "description": "A personal tilt-controlled browser maze game with keyboard and touch fallback.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Sean-xzx/cube-ball-maze-Wangravity.git"
+    "url": "https://github.com/Sean-xzx/Cube-Ball-Maze-Wangravity.git"
   },
   "bugs": {
-    "url": "https://github.com/Sean-xzx/cube-ball-maze-Wangravity/issues"
+    "url": "https://github.com/Sean-xzx/Cube-Ball-Maze-Wangravity/issues"
   },
   "private": true,
   "version": "1.0.0",
-  "license": "MIT",
+  "license": "UNLICENSED",
   "type": "module",
   "engines": {
     "node": ">=22.12.0"

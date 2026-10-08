@@ -1,58 +1,55 @@
 [English](README.md) | 简体中文
 
-# cube-ball-maze-Wangravity
+# Cube-Ball-Maze-Wangravity
 
-[![Validate game](https://github.com/Sean-xzx/cube-ball-maze-Wangravity/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Sean-xzx/cube-ball-maze-Wangravity/actions/workflows/ci.yml)
+结合倾斜操控、路线规划与重复挑战的网页钢球迷宫。作为个人小游戏项目，探索如何将物理交互做成完整、可验证的网页体验。
 
-个人网页迷宫小游戏：通过手机倾斜、触控拖动或桌面按键，引导钢球到达终点。
+[![Validate game](https://github.com/Sean-xzx/Cube-Ball-Maze-Wangravity/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Sean-xzx/Cube-Ball-Maze-Wangravity/actions/workflows/ci.yml)
 
-仓库/项目名称为 `cube-ball-maze-Wangravity`，npm 包名称为 `cube-ball-maze-wangravity`。游戏内 WANGRAVITY 品牌和历史存储/资源名称保持不变，以保留核心行为。
+## 项目价值
 
-## 范围与功能
+无需安装原生应用，在浏览器体验六张手工设计的倾斜钢球迷宫，从基础移动逐步引入移动陷阱、金币和双向传送门。校准、提示、结算与最好成绩，让操控形成可反复挑战的体验；按键和触控提供不依赖手机传感器的操作方式。
 
-这是一个原生 JavaScript 小游戏，不是通用引擎或生产级账号服务。包含教学关和五张手工制作的 15 × 15 地图、Three.js 画面、可选 Canvas 2D 渲染、水平校准、金币、固定/巡游/追踪陷阱、双向传送门、单次尝试倒计时、结算、本地最好成绩和精英榜单界面。包含合成音效；BGM 开关需要所有者提供音乐文件。音乐和校准插图因分发授权未确认，不包含在公开版本中。
+## 我的贡献
 
-[现有在线游戏](https://sean-xzx.github.io/wangravity/)是单独部署的版本，不能据此证明云端同步正常或最新源码已经部署。
+- **玩法与产品决策：**主导关卡递进、金币与传送门规则、生命评级、水平校准和排行榜展示的需求迭代。
+- **交互与功能整合：**将移动、转场、昵称/颜色头像、限时挑战和结算串成完整流程，保留本地最好成绩。
+- **交付与验证：**推动仓库整理与可复现检查，覆盖地图、物理、存储和浏览器流程。实现与验证使用了代码辅助，不将第三方库视为个人原创。
 
-![移动端 3D 结算画面](docs/images/summary.png)
+## 技术方法
 
-真实 Chromium 移动视口截图，来自远程干净副本的受控六关验收。画面中的时间和评级通过测试专用终点设置产生，不是人工纪录，也不证明全网云同步有效。
+- **统一输入：**校准后的设备方向/运动、触控拖动与按键进入同一移动接口，将手机姿态映射为钢球微操。
+- **物理与画面分离：**二维加速、摩擦和碰撞产生共享状态，由 Three.js 或 Canvas 绘制，无需重复实现玩法规则。
+- **状态驱动反馈：**提示、游玩、失败、结算和榜单暂停协同管理计时与进度；金币、生命额度与最好用时提供寻路之外的挑战目标。
 
-| 地图 | 单次尝试时间 | 生命评级额度 | 金币 | 附加机制 |
-| --- | --- | --- | --- | --- |
-| 教学关 | 24 秒 | 2 | 0 | 基础移动与终点 |
-| 第 1 关 | 36 秒 | 3 | 0 | 回廊迷宫 |
-| 第 2 关 | 48 秒 | 4 | 2 | 固定陷阱 |
-| 第 3 关 | 72 秒 | 5 | 2 | 固定与巡游陷阱 |
-| 第 4 关 | 144 秒 | 15 | 2 | 陷阱；收齐金币后激活传送门 |
-| 第 5 关 | 216 秒 | 30 | 3 | 巡游/追踪陷阱；入场即有传送门 |
+这些是工程设计亮点，不宣称原创物理算法或经过实验确认的研究创新。详见[架构与具体玩法规则](docs/ARCHITECTURE.md)。
 
-三项评级条件：到达终点、收齐金币、生命消耗不超额度。使用生命数为死亡次数加一。该关曾成功通关后进入挑战者模式，生命条件默认达标。用时决定榜单排序，不是独立评级星。金币不是通关必需条件。切换地图会重置该关死亡统计。失败重置倒计时和金币，不再显示提示。
+## 成果证据
 
-## 环境要求
+- **17 项自动测试通过：**覆盖地图约束、物理事件、隔离开发接口的存储/错误处理，以及仓库/文档一致性。
+- **六关浏览器验收通过：**桌面 3D、移动视口 3D、移动 Canvas 三种模式，检查启动、输入、榜单暂停、非空画面与结算。
+- 已验证 **Windows 与 Ubuntu 24.04**，Node.js 22.23.2 / npm 10.9.8。查看[已通过的远程 CI](https://github.com/Sean-xzx/Cube-Ball-Maze-Wangravity/actions/runs/37741557408)与[验证证据及边界](docs/VALIDATION.md)。
 
-- 已验证本地环境：Windows、Node.js 22.23.2、npm 10.9.8。使用 Node.js 22.12 或以上；`.nvmrc` 指定本次验证版本。
-- GitHub Actions 也验证了 Ubuntu 24.04，使用相同 Node.js/npm 版本；详见 CI 徽标和验证记录。
-- 获取代码和发布预检查需要 Git 位于 PATH。
-- 首次安装 npm 依赖和下载 Chromium 需要联网。本地游玩和自动验证不需要付费服务。
-- 浏览器和隔离开发接口测试分别需要 4195、4196 端口空闲。
-- 浏览器须支持 Canvas；完整画面还需要 WebGL。自动化测试使用 Chromium。
-- 手机倾斜需要实际传感器、HTTPS 和浏览器授权。手机访问局域网 HTTP 地址不满足传感器安全要求。本次整理没有验证 Android/iOS 真机行为。
+![已验证的移动视口结算画面](docs/images/summary.png)
 
-## 快速开始
+截图来自远程干净副本的真实 Chromium 运行。测试专用终点设置用于验收结算，画面用时**不是人工纪录**。未开展用户研究、性能基准或生产级云服务验证。[现有在线游戏](https://sean-xzx.github.io/wangravity/)为独立部署，不代表本仓库最新版本已上线。
+
+## 运行
+
+需要 Node.js 22.12+（`.nvmrc` 指定已验证的 22.23.2）、npm 和 Git。安装需要联网，本地游玩不需要付费服务。
 
 ```bash
-git clone https://github.com/Sean-xzx/cube-ball-maze-Wangravity.git
-cd cube-ball-maze-Wangravity
+git clone https://github.com/Sean-xzx/Cube-Ball-Maze-Wangravity.git
+cd Cube-Ball-Maze-Wangravity
 npm ci
 npm run dev -- --host 127.0.0.1 --port 5173 --strictPort
 ```
 
-打开 `http://127.0.0.1:5173/`。点击开始，输入昵称，可选择小球颜色，然后完成校准。退出教学提示后开始倒计时。桌面使用方向键或 WASD，触屏可以在迷宫内拖动。可以利用墙壁引导钢球。进入黑色终点洞后显示用时、最好成绩、金币、生命消耗和评级。关卡菜单可以打开全部六关。打开榜单会暂停玩法和倒计时。
+打开 `http://127.0.0.1:5173/`：开始、选择昵称/头像、校准，再关闭提示。用方向键/WASD 或触控拖动移动；进入黑色终点后，应显示用时、最好成绩、金币、生命和评级。六关均可选择，榜单打开时暂停玩法/倒计时。加 `?quality=lite` 使用 Canvas，或加 `?quality=auto` 在小屏/触控设备自动选择轻量模式；普通地址使用 3D，初始化失败则回退。
 
-不要把开发服务器或其未认证接口暴露到互联网。昵称只是查询键，不是身份认证，不要输入真实密码。
+手机倾斜需要传感器、HTTPS 和授权，局域网 HTTP 不满足要求。Android/iOS 真机传感器、震动、音频听感与持续运行性能**尚未验证**。不要将开发服务器暴露到互联网，也不要输入真实密码：昵称只是查询键，不是身份认证。
 
-## 构建与验证
+## 验证
 
 ```bash
 npm test
@@ -62,43 +59,16 @@ npm run test:browser
 npm run preview -- --host 127.0.0.1 --port 4173 --strictPort
 ```
 
-打开 `http://127.0.0.1:4173/` 查看构建后的网页。浏览器验证自行在 4195 端口启动预览，请保持空闲。成功时输出 `PASS desktop-3d`、`PASS mobile-3d` 和 `PASS mobile-lite`。截图保存在已忽略的 `test-results/`。测试使用受控调试状态触发终点，不是人工完整游玩或用时测评。外部服务被模拟为不可用，测试不会上传成绩到共享云端。详见[验证证据与边界](docs/VALIDATION.md)。
+预期：测试和构建成功；浏览器验收输出 `PASS desktop-3d`、`PASS mobile-3d` 和 `PASS mobile-lite`。打开 `http://127.0.0.1:4173/` 查看构建结果。测试需要 4195/4196 端口空闲，软件 GPU 下完整检查可能需要数分钟。截图保存在已忽略的 `test-results/`，测试禁用外部写入。`npm run test:browser -- --lite` 可做较小检查，但不替代全部模式。
 
-构建后可用 `npm run test:browser -- --lite` 做较小的干净副本验收，仅检查轻量模式。软件 GPU 下，桌面完整 3D 验证可能需要数分钟。
+## 详细说明与限制
 
-添加 `?quality=lite` 使用 Canvas 2D，或添加 `?quality=auto` 在小屏/触屏上自动选择轻量模式。普通地址选择 3D，初始化失败时回退 2D。
+入口：`index.html` → `src/main.js` → `Game.js`；数据流：输入 → 物理 → 规则/界面 → 渲染。无需 `.env`。浏览器存储保存昵称、头像与最好成绩，不恢复进行中的局。Vite 本地 JSON 接口仅在开发时提供，预览/静态托管不包含接口。**带认证的全网账号、安全共享排名与防作弊尚未实现为生产服务。**
 
-## 配置与资源
+可选音乐/插图与真实玩家 JSON 不随本次公开版本分发；合成音效和核心玩法保留。详见[资源与恢复](docs/RESOURCES.md)、[架构](docs/ARCHITECTURE.md)、[验证](docs/VALIDATION.md)和[安全说明](SECURITY.md)。3D 构建有代码块大小警告，手机榜单滚动存在触控处理限制。个人原型项目不提供维护承诺，可通过 [Issues](https://github.com/Sean-xzx/Cube-Ball-Maze-Wangravity/issues)反馈可复现问题。
 
-基础玩法不需要 `.env`。历史云端默认地址已禁用，不再包含写入凭据。不要将私有写入凭据放进浏览器 JavaScript。[资源与授权](docs/RESOURCES.md)记录可选音乐、图标的恢复路径与校验值。缺少这些资源时游戏仍可运行，但 BGM 静音、校准插图不可用。账号/榜单 JSON 属于私人业务数据，不公开上传；缺少 `data/` 时，开发接口会在首次写入时创建。
+## 权利与致谢
 
-浏览器 `localStorage` 保存昵称、头像、最好成绩、榜单缓存和 BGM 偏好。保留历史 `wristbound-*` 键名以兼容存档，清除站点存储可获得空白档案。Vite 开发中间件提供 `/api/player/:name` 和 `/api/leaderboard/records`，以本地 JSON 存储；`vite preview` 和静态托管不提供这些接口。云端合并代码仍是原型，本次整理不保证全网持久化、安全性或可用性。存档不会恢复球的位置或正在进行的倒计时。
+Copyright © 2026 Sean-xzx。**当前版本中作者拥有的代码与文档保留所有权利，不授予开源许可。**使用、修改、再分发及商业使用须事先取得书面许可，法律或 GitHub 平台条款赋予的权利除外。公开可查看不代表一般使用/修改授权；GitHub 平台仍可能允许站内查看与 fork。
 
-2026-10-08 检查时，旧云端读取接口返回 HTTP 404，随后禁用了默认地址。没有测试外部写入。游戏界面主要使用中文。全网账号和排行榜需要另行实现带身份认证的后端，静态托管本身不提供这些能力。
-
-## 结构与数据流
-
-```text
-index.html + style.css -> src/main.js -> Game.js
-InputManager -> 倾斜/拖动/按键 -> Physics -> 位置/碰撞事件
-LevelData -> Game + Physics + Renderer/LiteRenderer
-Game -> HUD/结算 + AudioManager + Transition + 本地/联网存储
-vite.config.js -> 仅开发 API；Vite -> dist/ 静态构建
-tests/ + scripts/ -> 验证；.github/workflows/ci.yml -> CI
-```
-
-`Game.js` 管理状态、计时、玩法和持久化。`Physics.js` 是独立于画面的二维模拟。`Renderer.js` 用 Three.js 展现它，`LiteRenderer.js` 用 Canvas 绘制相同玩法。`Transition.js` 在关卡间播放 CSS 立方体动画，与 Three.js 独立。[架构说明](docs/ARCHITECTURE.md)解释文件和关系。
-
-## 已知限制与状态
-
-这是个人项目，没有维护承诺。地图、物理和渲染保持原样；安全调整仅禁用旧云端默认地址、收紧开发服务器。没有启用旋转门。榜单每关最多 50 条记录，每个规范化昵称只保留一个最好成绩，没有身份认证或防作弊保护。全局阻止触摸滚动可能影响手机榜单滚动。
-
-兼容范围内更新依赖后，2026-10-08 的 npm 审计报告 0 项已知漏洞（Vite 8.3.3，Three.js 仍为 0.184.0），不代表应用没有其他漏洞。开发服务器默认只监听本机；接口拒绝跨来源请求、非 JSON 写入和超过 64 KiB 的请求，但仍不适合作为生产服务。完整 3D 构建会产生代码块大小警告。网页不能强制硬件震动强度，浏览器支持情况不同。传感器、震动、音频听感和移动性能需要真机检查。旧仓库和部署可能仍暴露旧写入能力，其撤销尚未验证；详见[安全说明](SECURITY.md)和[交接说明](docs/DELIVERY_HANDOFF.md)。
-
-## 开发与反馈
-
-修改前运行测试和浏览器检查。`window.__cubeMazeGame` 是内部调试入口，不是稳定 API。在 [GitHub Issues](https://github.com/Sean-xzx/cube-ball-maze-Wangravity/issues)附上设备/浏览器、地图、步骤和预期/实际结果，日志需去除秘密。除非明确要改玩法，否则保持地图/物理行为。CI 检查测试、构建、浏览器流程和发布条件；本地有工作流不等于远程检查通过。
-
-## 许可证与致谢
-
-代码经所有者确认采用 [MIT 许可证](LICENSE)。所有者的音乐、图标原件私有保留，不随本次发布分发，也不由代码许可证授权。详见[资源来源](docs/RESOURCES.md)。[Three.js](https://github.com/mrdoob/three.js)、[Vite](https://github.com/vitejs/vite) 和 [Playwright](https://github.com/microsoft/playwright)保留上游许可证。
+早期提交曾以 MIT 发布，本声明**不撤销**那些版本已经授予的许可。[Three.js](https://github.com/mrdoob/three.js)、[Vite](https://github.com/vitejs/vite) 与 [Playwright](https://github.com/microsoft/playwright)保留各自许可证。媒体分发权独立且尚未确认，详见[资源来源](docs/RESOURCES.md)。

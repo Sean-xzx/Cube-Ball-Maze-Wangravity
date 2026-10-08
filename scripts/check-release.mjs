@@ -1,4 +1,4 @@
-import { readFile, readdir, access } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
@@ -32,10 +32,14 @@ for (const relative of ['data/player-accounts.json', 'data/elite-leaderboard.jso
     if (error.code !== 'ENOENT') throw error;
   }
 }
-try {
-  await access(new URL('LICENSE', root));
-} catch {
-  findings.push('No LICENSE: owner must confirm the intended usage conditions before release.');
+const pkg = JSON.parse(await readFile(new URL('package.json', root), 'utf8'));
+const english = await readFile(new URL('README.md', root), 'utf8');
+const chinese = await readFile(new URL('README.zh-CN.md', root), 'utf8');
+if (pkg.license !== 'UNLICENSED' || !english.includes('All rights reserved') || !chinese.includes('保留所有权利')) {
+  findings.push('Current release must retain the owner-approved all-rights-reserved notice, without an open-source grant.');
+}
+if (tracked?.has('LICENSE')) {
+  findings.push('Current tree still tracks a LICENSE; verify removal of the previous open-source grant before release.');
 }
 const resources = await readFile(new URL('docs/RESOURCES.md', root), 'utf8');
 const bundledUnclearedAssets = ['public/audio/pixel-city-beat.mp3', 'public/images/wristbound-icon.png']

@@ -7,11 +7,12 @@ import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('../', import.meta.url));
 
 test('project title, npm metadata and repository target agree', async () => {
-  const projectName = 'cube-ball-maze-Wangravity';
+  const projectName = 'Cube-Ball-Maze-Wangravity';
   const repository = `https://github.com/Sean-xzx/${projectName}`;
   const pkg = JSON.parse(await readFile(path.join(root, 'package.json'), 'utf8'));
   assert.equal(pkg.name, projectName.toLowerCase());
-  assert.equal(pkg.license, 'MIT');
+  assert.equal(pkg.license, 'UNLICENSED');
+  await assert.rejects(access(path.join(root, 'LICENSE')), { code: 'ENOENT' });
   assert.equal(pkg.repository.url, `${repository}.git`);
   assert.equal(pkg.bugs.url, `${repository}/issues`);
   for (const file of ['README.md', 'README.zh-CN.md']) {
@@ -19,6 +20,8 @@ test('project title, npm metadata and repository target agree', async () => {
     assert.ok(content.includes(`# ${projectName}`));
     assert.ok(content.includes(`git clone ${repository}.git`));
     assert.ok(content.includes(`cd ${projectName}`));
+    assert.match(content, /All rights reserved|保留所有权利/);
+    assert.match(content, /does \*\*not\*\* revoke|\*\*不撤销\*\*/);
   }
 });
 
@@ -47,6 +50,7 @@ test('required runtime resources and locked dependencies are present', async () 
   const pkg = JSON.parse(await readFile(path.join(root, 'package.json'), 'utf8'));
   const lock = JSON.parse(await readFile(path.join(root, 'package-lock.json'), 'utf8'));
   assert.equal(lock.name, pkg.name);
+  assert.equal(lock.packages[''].license, pkg.license);
   assert.deepEqual(lock.packages[''].dependencies, pkg.dependencies);
   assert.deepEqual(lock.packages[''].devDependencies, pkg.devDependencies);
   for (const relative of ['index.html', 'style.css', 'docs/RESOURCES.md']) {

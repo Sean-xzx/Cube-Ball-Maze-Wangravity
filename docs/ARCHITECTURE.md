@@ -39,9 +39,23 @@ HTML loads CSS and main.js; main constructs Game. Each frame InputManager produc
 | scripts/browser-smoke.mjs | Built-preview UI/pixel checks; network isolated; local screenshots / 浏览器验收 |
 | scripts/check-release.mjs | Fails on exposed writes, real records, missing rights clearance / 发布门槛 |
 | .github/workflows/ci.yml | Tests/build/browser/release checks; no deployment job / 自动检查 |
-| LICENSE | Owner-confirmed MIT for code; not third-party asset authorization / 代码许可 |
+| README rights section + package.json | Current author-owned work: all rights reserved, UNLICENSED; historical MIT grants and upstream licenses remain / 当前权利声明，不撤销历史许可 |
 
 ## Important Contracts / 关键关系
+
+### Map Rules / 地图规则
+
+| Map / 地图 | Time per attempt / 单次时间 | Life rating budget / 生命评级额度 | Coins / 金币 | Mechanics / 机制 |
+| --- | --- | --- | --- | --- |
+| Tutorial / 教学 | 24 s | 2 | 0 | Movement and exit / 移动与终点 |
+| 1 | 36 s | 3 | 0 | Corridors / 回廊 |
+| 2 | 48 s | 4 | 2 | Static traps / 固定陷阱 |
+| 3 | 72 s | 5 | 2 | Static/patrolling traps / 固定与巡游陷阱 |
+| 4 | 144 s | 15 | 2 | Portals after all coins / 收齐金币后激活传送门 |
+| 5 | 216 s | 30 | 3 | Patrolling/chasing traps; portals at entry / 巡游、追踪陷阱与入场传送门 |
+
+Rating conditions are reaching the exit, collecting every coin and staying within the life budget (deaths + 1). A previous clear grants the life condition in challenger mode. Time sorts elite records, not a separate rating star. Coins are optional for clearing.
+评级分别看终点、全部金币与生命额度（死亡数 + 1）；曾通关后挑战者模式默认满足生命条件。时间用于榜单排序，不是独立评级星，金币不是通关必需。
 
 - All six maps are bounded 15 x 15 grids. Zero-based row 6/col 3 (user row 7/col 4) is road in level 5.
 - STAR/getStarPositions/collectedStars are legacy coin names. Rating stars are separate.

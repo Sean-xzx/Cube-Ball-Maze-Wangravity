@@ -1,7 +1,7 @@
 # Organization Handoff / 整理交接
 
-The new public repository is `Sean-xzx/cube-ball-maze-Wangravity`, with owner-confirmed MIT for code. The old `wangravity` repository and deployed game are separate and are not renamed, deleted or rewritten. The new repository starts from a sanitized snapshot, not the old history containing a write capability and real player records.
-新公开仓库为 `Sean-xzx/cube-ball-maze-Wangravity`，代码 MIT 已确认。旧 `wangravity` 仓库和现有网站独立保留，不重命名、删除或重写。新仓库从清理后的快照开始，不继承含写入能力和真实玩家记录的旧历史。
+The public repository is `Sean-xzx/Cube-Ball-Maze-Wangravity`. At the owner's latest request, current author-owned code/documentation reserves all rights without an open-source license. Historical MIT grants remain effective. The old `wangravity` repository and deployed game are separate and are not renamed, deleted or rewritten. This repository started from a sanitized snapshot, not the old history containing a write capability and real player records.
+公开仓库为 `Sean-xzx/Cube-Ball-Maze-Wangravity`。按所有者最新要求，当前作者拥有的代码与文档保留所有权利，不授予开源许可；历史 MIT 授权不撤销。旧 `wangravity` 仓库和网站独立保留，不重命名、删除或重写。新仓库从清理后的快照开始，不继承含写入能力和真实玩家记录的旧历史。
 
 This replaces the outdated handoff. The original remains in the owner's private backup. Historical claims that coins lock the exit, failures return to level one, and cloud features need no backend do not describe the current source.
 本文替代过期说明，原文保存在私有备份。旧文中的金币锁出口、失败回第一关、云端不需后端等说法与当前代码不符。
@@ -19,7 +19,7 @@ This replaces the outdated handoff. The original remains in the owner's private 
 
 ## Release Gate / 发布条件
 
-1. Owner-confirmed MIT code license is added.
+1. Current author-owned work has an owner-approved all-rights-reserved README notice and UNLICENSED package metadata; no open-source LICENSE is included. Historical grants and dependency licenses are not revoked.
 2. Music/icon rights remain unconfirmed; binaries are excluded, not silently relicensed. Optional restoration steps and checksums are in [RESOURCES.md](RESOURCES.md).
 3. Cloud defaults are removed from the new client. Revocation/rotation at the old service remains unverified; old histories/deployments are not claimed safe.
 4. Actual player JSON is no longer tracked, but private originals are not deleted.

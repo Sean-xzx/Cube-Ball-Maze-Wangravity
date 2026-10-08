@@ -5,8 +5,8 @@ Status: PENDING_OWNER_CONFIRMATION
 Publication disposition: both original binaries are excluded from the new public repository and ignored by Git. They remain in the owner's local workspace/private backup. No download link is provided because redistribution permission cannot be verified. All gameplay and synthesized effects work without them; BGM is silent and the calibration illustration is unavailable.
 发布处理：两个原始二进制文件不包含在新公开仓库中，已由 Git 忽略，本地工作区和私有备份保留。未提供下载链接，避免分发权不明的资源。缺少它们不影响玩法和合成音效，但 BGM 静音、校准插图不可用。
 
-The owner confirmed MIT for code. Both assets were supplied in the original project, but creator, original source and public redistribution rights remain unconfirmed. Existing public availability is not proof of permission. Keep private backup copies; do not publish anew before clearance. Do not delete or replace them silently.
-代码 MIT 已确认。现有资源由所有者提供，但作者、来源和公开分发权待确认；已有公开仓库不证明授权，不擅自删除替换。
+Current author-owned code/documentation reserves all rights without an open-source license; earlier MIT grants remain applicable to their historical versions. Both assets were supplied in the original project, but creator, original source and public redistribution rights remain unconfirmed. Existing public availability is not proof of permission. Keep private backup copies; do not publish anew before clearance. Do not delete or replace them silently.
+当前作者拥有的代码与文档保留所有权利，不授予开源许可；早期 MIT 仍适用于对应历史版本。现有资源由所有者提供，但作者、来源和公开分发权待确认；已有公开仓库不证明授权，不擅自删除替换。
 
 | Path | Use | Bytes | SHA-256 |
 | --- | --- | --- | --- |
