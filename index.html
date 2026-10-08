@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>腕有引力 · WANGRAVITY</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="start-screen" class="screen active">
+    <div class="ambient-glow ambient-glow-a"></div>
+    <div class="ambient-glow ambient-glow-b"></div>
+    <div class="floating-cubes" aria-hidden="true">
+      <div class="cube-deco cube-pink"></div>
+      <div class="cube-deco cube-yellow"></div>
+      <div class="cube-deco cube-cyan"></div>
+      <div class="cube-deco cube-green"></div>
+      <div class="cube-deco cube-purple"></div>
+      <div class="cube-deco cube-orange"></div>
+    </div>
+
+    <div class="start-content">
+      <div class="start-copy">
+        <p class="eyebrow">NEON GYRO MAZE · 六面体感挑战</p>
+        <h1 class="game-title"><span>腕有</span><span>引力</span></h1>
+        <p class="game-subtitle-en"><i></i>WANGRAVITY<i></i></p>
+        <p class="game-tagline">倾斜手机，让金属小球穿过霓虹立方体迷宫。</p>
+        <div class="start-actions">
+          <button id="btn-start" class="btn-primary">
+            <span>开始挑战</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+        </div>
+        <div class="start-badges" aria-hidden="true">
+          <span>体感操控</span>
+          <span>金属碰撞</span>
+          <span>六面迷宫</span>
+        </div>
+      </div>
+
+      <div class="start-visual" aria-hidden="true">
+        <div class="hero-maze-stage">
+          <span class="hero-ring hero-ring-a"></span>
+          <span class="hero-ring hero-ring-b"></span>
+          <div class="hero-maze-board">
+            <span class="hero-wall hero-wall-a"></span>
+            <span class="hero-wall hero-wall-b"></span>
+            <span class="hero-wall hero-wall-c"></span>
+            <span class="hero-wall hero-wall-d"></span>
+            <span class="hero-wall hero-wall-e"></span>
+            <span class="hero-wall hero-wall-f"></span>
+            <span class="hero-goal-hole"></span>
+            <span class="hero-danger-hole"></span>
+            <span class="hero-start-ball"></span>
+          </div>
+        </div>
+        <p class="visual-caption"><strong>01</strong><span>ROLL · TILT · FLIP</span></p>
+      </div>
+    </div>
+
+    <div class="start-footer">
+      <span>6 个立方体平面</span>
+      <span>陀螺仪实时控制</span>
+      <span>金属碰撞反馈</span>
+    </div>
+  </div>
+
+  <div id="calibration-screen" class="screen">
+    <div class="ambient-glow ambient-glow-a"></div>
+    <div class="ambient-glow ambient-glow-b"></div>
+    <div class="calibration-panel">
+      <div class="calibration-icon-wrap" aria-hidden="true">
+        <img src="./images/wristbound-icon.png" alt="">
+        <span class="calibration-orbit"></span>
+      </div>
+      <p class="eyebrow">CALIBRATION · HORIZONTAL LOCK</p>
+      <h1 class="calibration-title">水平校准</h1>
+      <p class="calibration-copy">把手机平放在手中或桌面上，点击按钮后允许“动作与方向”权限，并记录当前水平姿态。</p>
+      <div class="phone-level" aria-hidden="true">
+        <span class="level-line"></span>
+        <span class="level-ball"></span>
+      </div>
+      <p id="calibration-status" class="calibration-status">准备好后点击“完成校准”。手机端将启用陀螺仪控制钢球。</p>
+      <label class="player-name-field" for="player-name-input">
+        <span>玩家用户名</span>
+        <input id="player-name-input" type="text" maxlength="16" autocomplete="nickname" placeholder="输入用户名">
+      </label>
+      <div class="avatar-picker" aria-label="选择头像">
+        <span class="avatar-picker-title">选择头像</span>
+        <div class="avatar-options">
+          <button type="button" class="avatar-option" data-avatar-color="#f3f5f7" aria-label="银色小球"></button>
+          <button type="button" class="avatar-option" data-avatar-color="#ffd93d" aria-label="黄色小球"></button>
+          <button type="button" class="avatar-option" data-avatar-color="#51cf66" aria-label="绿色小球"></button>
+          <button type="button" class="avatar-option" data-avatar-color="#339af0" aria-label="蓝色小球"></button>
+          <button type="button" class="avatar-option" data-avatar-color="#cc5de8" aria-label="紫色小球"></button>
+          <button type="button" class="avatar-option" data-avatar-color="#ff922b" aria-label="橙色小球"></button>
+        </div>
+      </div>
+      <button id="btn-confirm-calibration" class="btn-primary" type="button">
+        <span>完成校准</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="game-screen" class="screen">
+    <div class="game-ambient game-ambient-a"></div>
+    <div class="game-ambient game-ambient-b"></div>
+
+    <div id="hud">
+      <div class="hud-left">
+        <div class="brand-cube" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+        <div class="hud-title-group">
+          <span class="hud-title">腕有引力</span>
+          <span class="hud-subtitle">WANGRAVITY</span>
+        </div>
+      </div>
+      <div class="hud-right">
+        <button id="btn-restart-ingame" class="hud-btn" title="重新开始">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+        </button>
+        <button id="btn-bgm-toggle" class="hud-btn bgm-toggle" type="button" title="关闭背景音乐" aria-label="关闭背景音乐" aria-pressed="true">
+          <svg class="bgm-icon bgm-icon-on" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          <svg class="bgm-icon bgm-icon-off" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/><path d="M3 3l18 18"/></svg>
+        </button>
+        <button id="btn-leaderboard" class="hud-btn" title="精英榜单" aria-label="精英榜单">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0V4Z"/><path d="M5 5H3v2a4 4 0 0 0 4 4"/><path d="M19 5h2v2a4 4 0 0 1-4 4"/></svg>
+        </button>
+        <div class="level-menu">
+          <button id="btn-level-menu" class="hud-btn" title="关卡菜单" aria-label="关卡菜单" aria-expanded="false">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+          <div id="level-menu-panel" class="level-menu-panel hidden">
+            <span class="level-menu-title">关卡跳转</span>
+            <button type="button" data-jump-face="0">教学关</button>
+            <button type="button" data-jump-face="1">第 1 关</button>
+            <button type="button" data-jump-face="2">第 2 关</button>
+            <button type="button" data-jump-face="3">第 3 关</button>
+            <button type="button" data-jump-face="4">第 4 关</button>
+            <button type="button" data-jump-face="5">第 5 关</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="level-bar">
+      <div class="level-copy">
+        <span id="level-label">LEVEL 01</span>
+        <span id="face-name">第 1 面 · 启程</span>
+      </div>
+      <div class="progress-track">
+        <div id="progress-dots">
+          <span class="dot" data-face="0"></span>
+          <span class="dot" data-face="1"></span>
+          <span class="dot" data-face="2"></span>
+          <span class="dot" data-face="3"></span>
+          <span class="dot" data-face="4"></span>
+          <span class="dot" data-face="5"></span>
+        </div>
+        <span class="cube-finish" aria-label="六面终点">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/></svg>
+        </span>
+      </div>
+    </div>
+
+    <div id="top-status" class="top-status">
+      <div id="countdown-bar" class="countdown-bar">
+        <span class="countdown-label">TIME LIMIT</span>
+        <span id="countdown">00:10</span>
+      </div>
+      <div class="objective-slot" aria-live="polite">
+        <div id="star-counter" class="star-counter hidden">
+          <span class="coin-hud-icon" aria-hidden="true"></span>
+          <span id="coin-counter-text">0/0</span>
+        </div>
+        <div id="goal-toast" class="goal-toast hidden" role="status">
+          <span class="goal-toast-kicker">COIN BONUS</span>
+          <span>金币收集完成 · 三星条件达成</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="canvas-wrapper">
+      <div id="maze-shell">
+        <span class="shell-corner shell-corner-tl"></span>
+        <span class="shell-corner shell-corner-tr"></span>
+        <span class="shell-corner shell-corner-bl"></span>
+        <span class="shell-corner shell-corner-br"></span>
+        <canvas id="game-canvas"></canvas>
+      </div>
+    </div>
+
+    <div id="bottom-bar">
+      <div class="tilt-control" aria-hidden="true">
+        <span class="tilt-arrow">‹</span>
+        <svg width="24" height="32" viewBox="0 0 24 32" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="2" width="16" height="28" rx="3"/><path d="M10 26h4"/></svg>
+        <span class="tilt-arrow">›</span>
+      </div>
+      <span id="mechanic-hint" class="bottom-hint">倾斜手机控制金属球 · 桌面端使用 WASD</span>
+      <div class="sensor-tools">
+        <span id="sensor-status" class="sensor-status">正在检测控制方式</span>
+        <button id="btn-sensor-calibrate" class="sensor-calibrate" type="button" aria-label="重置体感水平">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
+          <span>重置体感</span>
+        </button>
+      </div>
+    </div>
+
+    <div id="gameplay-tip" class="gameplay-tip hidden" role="dialog" aria-modal="true" aria-labelledby="gameplay-tip-title">
+      <div class="gameplay-tip-panel">
+        <span id="gameplay-tip-kicker" class="gameplay-tip-kicker">RULE UPDATE</span>
+        <h2 id="gameplay-tip-title">玩法提示</h2>
+        <p id="gameplay-tip-text"></p>
+        <span class="gameplay-tip-action">按任意键 / 轻触继续</span>
+      </div>
+    </div>
+
+    <div id="level-summary" class="level-summary hidden" role="dialog" aria-modal="true" aria-labelledby="summary-title">
+      <div class="level-summary-panel">
+        <span id="summary-kicker" class="summary-kicker">LEVEL CLEAR</span>
+        <h2 id="summary-title">关卡结算</h2>
+        <div id="summary-stars" class="summary-stars" aria-label="星级评价">☆☆☆</div>
+        <div class="summary-grid">
+          <div class="summary-row">
+            <span>本次用时</span>
+            <strong id="summary-time">00:00</strong>
+          </div>
+          <div class="summary-row">
+            <span>最好成绩</span>
+            <strong id="summary-best">00:00</strong>
+          </div>
+          <div class="summary-row">
+            <span>到达终点</span>
+            <strong id="summary-goal">达标</strong>
+          </div>
+          <div class="summary-row">
+            <span>金币收集</span>
+            <strong id="summary-collect">0/0</strong>
+          </div>
+          <div class="summary-row">
+            <span>生命消耗</span>
+            <strong id="summary-lives">1/2</strong>
+          </div>
+        </div>
+        <p id="summary-elite" class="summary-elite"></p>
+        <div class="summary-actions">
+          <button id="btn-summary-retry" class="btn-secondary" type="button">重新挑战</button>
+          <button id="btn-summary-continue" class="btn-primary" type="button">
+            <span>继续</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="leaderboard-modal" class="leaderboard-modal hidden" role="dialog" aria-modal="true" aria-labelledby="leaderboard-title">
+      <div class="leaderboard-panel">
+        <button id="btn-leaderboard-close" class="modal-close" type="button" aria-label="关闭精英榜单">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+        <span class="leaderboard-kicker">ELITE BOARD</span>
+        <h2 id="leaderboard-title">精英榜单</h2>
+        <div id="leaderboard-tabs" class="leaderboard-tabs" aria-label="选择关卡榜单">
+          <button type="button" data-board-face="0">教学</button>
+          <button type="button" data-board-face="1">第1关</button>
+          <button type="button" data-board-face="2">第2关</button>
+          <button type="button" data-board-face="3">第3关</button>
+          <button type="button" data-board-face="4">第4关</button>
+          <button type="button" data-board-face="5">第5关</button>
+        </div>
+        <div id="leaderboard-self" class="leaderboard-self"></div>
+        <div id="leaderboard-list" class="leaderboard-list"></div>
+      </div>
+    </div>
+
+    <div id="face-toast" class="toast hidden">
+      <span class="toast-kicker">LEVEL UPDATE</span>
+      <span id="face-toast-text"></span>
+    </div>
+  </div>
+
+  <div id="transition-screen" class="screen">
+    <p class="transition-kicker">LEVEL CLEAR</p>
+    <h2 class="transition-title">翻转正方体<br><span>迎接下一面</span></h2>
+    <div id="cube-container">
+      <div id="cube">
+        <div class="cube-face" id="cube-front"></div>
+        <div class="cube-face" id="cube-back"></div>
+        <div class="cube-face" id="cube-right"></div>
+        <div class="cube-face" id="cube-left"></div>
+        <div class="cube-face" id="cube-top"></div>
+        <div class="cube-face" id="cube-bottom"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="complete-screen" class="screen">
+    <div class="ambient-glow ambient-glow-a"></div>
+    <div class="ambient-glow ambient-glow-b"></div>
+    <div class="floating-cubes" aria-hidden="true">
+      <div class="cube-deco cube-pink"></div>
+      <div class="cube-deco cube-yellow"></div>
+      <div class="cube-deco cube-cyan"></div>
+      <div class="cube-deco cube-green"></div>
+    </div>
+    <div class="complete-content">
+      <p class="eyebrow">ALL LEVELS CLEAR</p>
+      <h1 class="complete-title">六面通关<span>!</span></h1>
+      <p class="complete-subtitle">你已经翻越整个正方体迷宫。</p>
+      <div id="complete-stats">
+        <div class="stat-item">
+          <span class="stat-label">总用时</span>
+          <span id="total-time" class="stat-value">00:00</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">完成面数</span>
+          <span class="stat-value">06 / 06</span>
+        </div>
+      </div>
+      <button id="btn-restart" class="btn-primary">
+        <span>再挑战一次</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8.1 8.1 0 0 0-15.5-2M4 5v4h4"/><path d="M4 13a8.1 8.1 0 0 0 15.5 2M20 19v-4h-4"/></svg>
+      </button>
+    </div>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
