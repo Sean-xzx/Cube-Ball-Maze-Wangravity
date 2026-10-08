@@ -2,6 +2,8 @@
 
 # cube-ball-maze-Wangravity
 
+[![Validate game](https://github.com/Sean-xzx/cube-ball-maze-Wangravity/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Sean-xzx/cube-ball-maze-Wangravity/actions/workflows/ci.yml)
+
 个人网页迷宫小游戏：通过手机倾斜、触控拖动或桌面按键，引导钢球到达终点。
 
 仓库/项目名称为 `cube-ball-maze-Wangravity`，npm 包名称为 `cube-ball-maze-wangravity`。游戏内 WANGRAVITY 品牌和历史存储/资源名称保持不变，以保留核心行为。
@@ -11,6 +13,10 @@
 这是一个原生 JavaScript 小游戏，不是通用引擎或生产级账号服务。包含教学关和五张手工制作的 15 × 15 地图、Three.js 画面、可选 Canvas 2D 渲染、水平校准、金币、固定/巡游/追踪陷阱、双向传送门、单次尝试倒计时、结算、本地最好成绩和精英榜单界面。包含合成音效；BGM 开关需要所有者提供音乐文件。音乐和校准插图因分发授权未确认，不包含在公开版本中。
 
 [现有在线游戏](https://sean-xzx.github.io/wangravity/)是单独部署的版本，不能据此证明云端同步正常或最新源码已经部署。
+
+![移动端 3D 结算画面](docs/images/summary.png)
+
+真实 Chromium 移动视口截图，来自远程干净副本的受控六关验收。画面中的时间和评级通过测试专用终点设置产生，不是人工纪录，也不证明全网云同步有效。
 
 | 地图 | 单次尝试时间 | 生命评级额度 | 金币 | 附加机制 |
 | --- | --- | --- | --- | --- |

@@ -80,6 +80,15 @@ The owner subsequently authorized publication and vulnerability remediation. A f
 
 依赖审计已知漏洞为 0。开发接口除既有存储行为外，还验证跨来源、非 JSON、非法 JSON/路径和超大请求。新仓库已创建且公开，但创建不等于上传或 CI 通过。仅改动 Game.js 云端配置和 vite.config.js，其他受保护文件及私人原件保持不变。
 
+### Remote Publication Verification / 远程发布验证
+
+- Public snapshot commit `ecf6bacbf06096ff2585d5fdbc679107ffbb8fb3` reached main in `Sean-xzx/cube-ball-maze-Wangravity`. Owner, public visibility and main default branch were verified via GitHub. Its clean initial history excludes private data, original media, backups and old write capabilities.
+- A fresh clone downloaded from GitHub passed npm ci, 17 tests, production build, explicit Chromium installation and all three browser scenarios (mobile-lite, mobile-3d, desktop-3d), six maps each. No external service writes occurred.
+- Initial Linux CI failed because the test harness did not strip ANSI color codes from Vite startup output. Commit `0ddf9d9d33e343af15160f7450382804c9c37e1f` fixes only test startup parsing. Windows tests also passed with FORCE_COLOR=1. Its remote CI result must be checked independently.
+- Both README files include a genuine mobile-viewport result screenshot. Times are controlled test output, not measured human completion times. Optional media remains intentionally absent from the public release.
+
+公开快照已到达新仓库 main，账号、可见性和默认分支已核实，初始历史不含私人数据、原始媒体、备份或旧写入凭据。从 GitHub 下载的全新副本通过依赖安装、17 项测试、构建、安装 Chromium 及三种浏览器模式的六关验收；没有写入外部服务。首轮 Linux CI 因测试启动输出的彩色控制码失败，已只修复测试解析并在 Windows 强制彩色输出下验证通过；新远程运行结果需独立核实。双语 README 包含真实受控截图，不伪装为人工通关用时。
+
 真机硬件、音频听感、安全云服务、资源授权及发布后验证不能以本地静态或模拟测试代替。
 
 ## Reproduction / 复现

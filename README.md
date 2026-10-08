@@ -2,6 +2,8 @@
 
 # cube-ball-maze-Wangravity
 
+[![Validate game](https://github.com/Sean-xzx/cube-ball-maze-Wangravity/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Sean-xzx/cube-ball-maze-Wangravity/actions/workflows/ci.yml)
+
 A personal browser maze game: guide a steel ball with phone tilt, touch dragging, or desktop keys.
 
 Repository/project name: `cube-ball-maze-Wangravity`; npm package name: `cube-ball-maze-wangravity`. The in-game WANGRAVITY branding and legacy storage/resource names remain unchanged to preserve core behavior.
@@ -11,6 +13,10 @@ Repository/project name: `cube-ball-maze-Wangravity`; npm package name: `cube-ba
 This is a small vanilla JavaScript game, not a reusable engine or a production account service. It includes a tutorial and five handcrafted 15 x 15 maps, Three.js visuals, optional Canvas 2D rendering, calibration, coins, static/patrolling/chasing traps, paired portals, per-attempt countdowns, results, local best times, and an elite leaderboard interface. Synthesized effects are included. The BGM toggle requires an owner-supplied music file; music and the calibration illustration are excluded from this public release because redistribution rights are unconfirmed.
 
 [Existing hosted game](https://sean-xzx.github.io/wangravity/) is a separately deployed build: it does not prove cloud synchronization works or the latest source is deployed.
+
+![Mobile 3D result screen](docs/images/summary.png)
+
+Actual Chromium mobile-viewport screenshot from the fresh remote clone's controlled six-map verification. The displayed time/rating use test-only goal setup, not a human record or evidence of global cloud synchronization.
 
 | Map | Time per attempt | Life rating budget | Coins | Additional mechanics |
 | --- | --- | --- | --- | --- |
