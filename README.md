@@ -32,6 +32,7 @@ Three rating conditions: reaching the exit, collecting every coin, and staying w
 ## Requirements
 
 - Verified locally: Windows, Node.js 22.23.2, npm 10.9.8. Use Node.js 22.12 or newer; `.nvmrc` selects the tested version.
+- Also verified in GitHub Actions: Ubuntu 24.04 with the same Node.js/npm versions; see the CI badge and validation log.
 - Git must be on PATH for cloning and the release preflight.
 - Internet for initial npm install and Chromium download. No paid service is required for local play or automated verification.
 - Keep ports 4195 and 4196 free for browser and isolated development-API tests, respectively.

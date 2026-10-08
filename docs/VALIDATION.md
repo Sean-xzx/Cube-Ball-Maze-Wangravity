@@ -8,7 +8,7 @@ On 2026-10-08, source c6ae20e318d9779aa47d1fd4fd1e6ecd683f7467 matched GitHub in
 - Windows, Node.js 22.23.2, npm 10.9.8.
 - Preserved Vite 8.0.14 / Three.js 0.184.0 lock.
 - Playwright 1.62.1 and downloaded Chromium for desktop/mobile-viewport emulation.
-- Linux CI and remote checks are not verified until a remote run occurs.
+- Initial local checks did not verify Linux. The later public-release Linux CI result is recorded below.
 
 ## Initial Organization Results (Before Security Release) / 安全处理前的整理结果
 
@@ -34,10 +34,10 @@ On 2026-10-08, source c6ae20e318d9779aa47d1fd4fd1e6ecd683f7467 matched GitHub in
 
 On 2026-10-08, the requested project name was updated to `cube-ball-maze-Wangravity`; the npm identifier is lowercase. Repository metadata, clone instructions and issue links now target the new repository. The existing hosted game URL and original remote are unchanged.
 
-- Before-edit backup: `C:\Users\31796\Documents\WANGRAVITY-backups\before-project-rename-20261008`, including all 35 tracked files and a Git history bundle.
+- Before-edit backup: private storage outside the repository, including all 35 tracked files and a Git history bundle. The owner received its absolute path separately.
 - After the metadata/documentation update: 16 tests passed, production build passed, and the mobile-lite browser scenario passed all six maps.
 - All 16 protected files remained byte-identical to this backup; generated build asset names remained unchanged.
-- A fresh private local clone of commit `ae3de0e41ef6e5db76a69d67a1d5c048a07f082b` at `C:\Users\31796\Documents\cube-ball-maze-Wangravity-verification-20261008` passed npm ci, all 16 tests, production build and the lightweight six-map browser check. All six generated files matched the workspace by SHA-256. This is local-clone evidence, not remote publication evidence.
+- A fresh private local clone of commit `ae3de0e41ef6e5db76a69d67a1d5c048a07f082b` passed npm ci, all 16 tests, production build and the lightweight six-map browser check. All six generated files matched the workspace by SHA-256. This is local-clone evidence, not remote publication evidence.
 - New repository lookup returned 404. The connected GitHub tools have no repository-creation operation; the browser creation page requires sign-in. No new repository was created or pushed.
 
 本轮仅修改项目名称、仓库元信息、说明和对应测试。修改前备份包含全部 35 个已跟踪文件与 Git 历史。16 项测试、构建及移动轻量模式六关验收通过；16 个受保护文件逐字节不变。新仓库查询返回 404，创建仓库页面尚需登录，未创建或推送新仓库。
@@ -68,7 +68,6 @@ npm run check:release must fail while embedded write capability, real player rec
 - Hardware vibration strength and subjective BGM/effect loudness.
 - Secure accounts, cloud availability/consistency/concurrent updates and anti-cheat.
 - Asset rights until owner confirmation.
-- Remote CI and clean-clone verification of an organized remote commit until actual upload.
 
 ## Security Release / 安全发布
 
@@ -88,9 +87,11 @@ The owner subsequently authorized publication and vulnerability remediation. A f
 - A fresh clone downloaded from GitHub passed npm ci, 17 tests, production build, explicit Chromium installation and all three browser scenarios (mobile-lite, mobile-3d, desktop-3d), six maps each. No external service writes occurred.
 - Initial Linux CI failed because the test harness did not strip ANSI color codes from Vite startup output. Commit `0ddf9d9d33e343af15160f7450382804c9c37e1f` fixes only test startup parsing. Windows tests also passed with FORCE_COLOR=1. Its remote CI result must be checked independently.
 - Subsequent Linux runs passed unit tests/build/release preflight but exposed software-GPU interaction delays and the fixed 100 ms resume assumption. The harness now uses state-based movement/resume waits and bounded desktop raster work, without changing the shipped game. Live CI evidence is linked from both README badges.
+- Commit `216b73b7ba4676764b4cb60ae07a39d62a5489ea` passed the complete [GitHub Actions run](https://github.com/Sean-xzx/cube-ball-maze-Wangravity/actions/runs/37741060104) on Ubuntu 24.04, Node.js 22.23.2 and npm 10.9.8: npm ci, audit, 17 tests, build, release preflight, Chromium installation and all three six-map browser scenarios. The same remote checkout passed the full Windows browser run. Subsequent documentation commits are checked by the same workflow; the README badge reflects its latest result.
 - Both README files include a genuine mobile-viewport result screenshot. Times are controlled test output, not measured human completion times. Optional media remains intentionally absent from the public release.
 
 公开快照已到达新仓库 main，账号、可见性和默认分支已核实，初始历史不含私人数据、原始媒体、备份或旧写入凭据。从 GitHub 下载的全新副本通过依赖安装、17 项测试、构建、安装 Chromium 及三种浏览器模式的六关验收；没有写入外部服务。首轮 Linux CI 因测试启动输出的彩色控制码失败，已只修复测试解析并在 Windows 强制彩色输出下验证通过；新远程运行结果需独立核实。双语 README 包含真实受控截图，不伪装为人工通关用时。
+提交 `216b73b` 的上述 GitHub Actions 已全部成功，在 Ubuntu 24.04、Node.js 22.23.2、npm 10.9.8 下完成安装、审计、17 项测试、构建、发布检查、Chromium 安装及三种模式各六关验收。同一远程副本在 Windows 完整浏览器检查也通过。后续文档提交仍由同一工作流检查，README 徽标显示最新结果。
 
 真机硬件、音频听感、安全云服务、资源授权及发布后验证不能以本地静态或模拟测试代替。
 
