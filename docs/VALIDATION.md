@@ -51,7 +51,9 @@ The API test copies the original development configuration to temporary isolated
 npm run test:browser opens built assets at desktop/mobile viewports; tests start/calibration/tips, key input, paused countdown, six-map selection, nonblank canvas pixels, three-star summaries and completion. Test-only debug setup bypasses hazard difficulty to deterministically exercise the goal/fall/summary path. This is not a human timed playthrough or proof of sensor fidelity. External services are mocked unavailable: no shared cloud writes.
 
 Desktop headless verification limits requestAnimationFrame to 10 callbacks per second to bound software-GPU workload; mobile-emulated cases retain native scheduling. This test setup is not shipped in the application and is not a frame-rate benchmark. Screenshots pause the already-completed game's draw loop to avoid compositor timeout.
+Desktop verification additionally uses deviceScaleFactor 0.5 with the original 1280 x 900 CSS viewport. Rendering is paused during test-only menu manipulation and result overlays; movement and leaderboard pause/resume assertions run with the original loop active and wait for actual state changes instead of assuming a 100 ms deadline. Mobile scenarios retain deviceScaleFactor 1.
 桌面无头测试将动画回调限制为每秒 10 次，控制软件 GPU 的负担；移动视口保持原生调度。该设置不会进入游戏代码，也不用于测量帧率。截图时暂停已进入结算的绘制循环。
+桌面保持 1280 × 900 CSS 视口，测试设备像素倍率为 0.5，降低软件光栅负担；测试操作菜单、结果遮罩时暂停绘制，移动与榜单暂停/恢复仍运行原循环并等待实际变化，不假定 100 毫秒完成。移动视口像素倍率仍为 1。
 
 Canvas pixel inspection pauses the test session's draw loop; scripted goal setup then resets the frame clock and resumes the original loop. This excludes headless diagnostic latency from the attempt countdown. The leaderboard pause assertion runs separately with the loop active.
 读取画布像素时暂停测试会话绘制，设置受控终点后重置帧时间并恢复原循环，避免无头诊断耗时触发超时。榜单暂停断言在原循环运行时单独验收。
@@ -85,6 +87,7 @@ The owner subsequently authorized publication and vulnerability remediation. A f
 - Public snapshot commit `ecf6bacbf06096ff2585d5fdbc679107ffbb8fb3` reached main in `Sean-xzx/cube-ball-maze-Wangravity`. Owner, public visibility and main default branch were verified via GitHub. Its clean initial history excludes private data, original media, backups and old write capabilities.
 - A fresh clone downloaded from GitHub passed npm ci, 17 tests, production build, explicit Chromium installation and all three browser scenarios (mobile-lite, mobile-3d, desktop-3d), six maps each. No external service writes occurred.
 - Initial Linux CI failed because the test harness did not strip ANSI color codes from Vite startup output. Commit `0ddf9d9d33e343af15160f7450382804c9c37e1f` fixes only test startup parsing. Windows tests also passed with FORCE_COLOR=1. Its remote CI result must be checked independently.
+- Subsequent Linux runs passed unit tests/build/release preflight but exposed software-GPU interaction delays and the fixed 100 ms resume assumption. The harness now uses state-based movement/resume waits and bounded desktop raster work, without changing the shipped game. Live CI evidence is linked from both README badges.
 - Both README files include a genuine mobile-viewport result screenshot. Times are controlled test output, not measured human completion times. Optional media remains intentionally absent from the public release.
 
 公开快照已到达新仓库 main，账号、可见性和默认分支已核实，初始历史不含私人数据、原始媒体、备份或旧写入凭据。从 GitHub 下载的全新副本通过依赖安装、17 项测试、构建、安装 Chromium 及三种浏览器模式的六关验收；没有写入外部服务。首轮 Linux CI 因测试启动输出的彩色控制码失败，已只修复测试解析并在 Windows 强制彩色输出下验证通过；新远程运行结果需独立核实。双语 README 包含真实受控截图，不伪装为人工通关用时。

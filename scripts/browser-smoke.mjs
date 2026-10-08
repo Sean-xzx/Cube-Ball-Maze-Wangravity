@@ -35,9 +35,13 @@ try {
     { name: 'mobile-3d', viewport: { width: 390, height: 844 }, quality: '', mobile: true },
     { name: 'desktop-3d', viewport: { width: 1280, height: 900 }, quality: '', mobile: false },
   ].filter(mode => process.argv[2] !== '--lite' || mode.quality === '?quality=lite')) {
-    const context = await browser.newContext({ viewport: mode.viewport, isMobile: mode.mobile, hasTouch: mode.mobile });
+    const context = await browser.newContext({
+      viewport: mode.viewport, isMobile: mode.mobile, hasTouch: mode.mobile,
+      // Keep desktop layout intact while bounding software-GPU raster cost.
+      deviceScaleFactor: mode.mobile ? 1 : 0.5,
+    });
     const page = await context.newPage();
-    page.setDefaultTimeout(15000);
+    page.setDefaultTimeout(45000);
     if (!mode.mobile) {
       // Bound software-GPU work in headless desktop verification; not a performance benchmark.
       await page.addInitScript(() => {
@@ -69,7 +73,7 @@ try {
 
     const initialX = await page.evaluate(() => window.__cubeMazeGame.physics.x);
     await page.keyboard.down('d');
-    await page.waitForTimeout(150);
+    await page.waitForFunction(x => window.__cubeMazeGame.physics.x > x, initialX);
     await page.keyboard.up('d');
     assert.ok(await page.evaluate(x => window.__cubeMazeGame.physics.x > x, initialX));
     await page.locator('#btn-leaderboard').click();
@@ -77,12 +81,12 @@ try {
     await page.waitForTimeout(250);
     assert.equal(await page.evaluate(() => window.__cubeMazeGame.faceTimeRemainingMs), paused);
     await page.locator('#btn-leaderboard-close').click();
-    await page.waitForTimeout(100);
-    assert.ok(await page.evaluate(value => window.__cubeMazeGame.faceTimeRemainingMs < value, paused));
+    await page.waitForFunction(value => window.__cubeMazeGame.faceTimeRemainingMs < value, paused);
 
     const limits = [24, 36, 48, 72, 144, 216];
     for (let index = 0; index < limits.length; index++) {
       console.log(`CHECK ${mode.name}: map ${index}`);
+      await page.evaluate(() => window.__cubeMazeGame._stopLoop());
       await page.locator('#btn-level-menu').click();
       await page.locator(`[data-jump-face="${index}"]`).click();
       assert.equal(await page.evaluate(() => window.__cubeMazeGame.currentFace), index);
@@ -132,8 +136,8 @@ try {
       });
       await page.waitForFunction(() => window.__cubeMazeGame.state === 'SUMMARY', null, { timeout: 45000 });
       assert.equal(await page.locator('#summary-stars').textContent(), '★★★');
+      await page.evaluate(() => window.__cubeMazeGame._stopLoop());
       if (index === 5) {
-        await page.evaluate(() => window.__cubeMazeGame._stopLoop());
         await page.screenshot({ path: fileURLToPath(new URL(`../test-results/${mode.name}.png`, import.meta.url)), animations: 'disabled', timeout: 45000 });
       }
       await page.locator('#btn-summary-continue').click();
